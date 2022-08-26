@@ -29,7 +29,7 @@ public class Primes {
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            printPrimes(reader.read());
+            printPrimes(Integer.parseInt(reader.readLine()));
         } catch (IOException e) {
             e.printStackTrace();
         }

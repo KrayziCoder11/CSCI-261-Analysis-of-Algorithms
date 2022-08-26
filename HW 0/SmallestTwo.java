@@ -3,12 +3,12 @@ public class SmallestTwo {
 
     static void findSmallestTwo() throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int length = reader.read();
-        int first = reader.read();
-        int second = reader.read();
+        int length = Integer.parseInt(reader.readLine());
+        int first = Integer.parseInt(reader.readLine());
+        int second = Integer.parseInt(reader.readLine());
 
         for (int i = 2; i < length; i++){
-            int newest = reader.read();
+            int newest = Integer.parseInt(reader.readLine());
             
             if(newest < first){
                 second = first;
