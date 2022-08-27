@@ -13,6 +13,12 @@ public class SmallestTwo {
             if (second > first){
                 break;
             }
+            else if (second < first){
+                int temp = first;
+                first = second;
+                second = temp;
+                break;
+            }
         }
             
         for (int i = count; i < length; i++){
