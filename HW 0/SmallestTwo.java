@@ -5,9 +5,17 @@ public class SmallestTwo {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int length = Integer.parseInt(reader.readLine());
         int first = Integer.parseInt(reader.readLine());
-        int second = Integer.parseInt(reader.readLine());
-
-        for (int i = 2; i < length; i++){
+        int count = 1;
+        int second;
+        while (true){
+            second = Integer.parseInt(reader.readLine());
+            count++;
+            if (second > first){
+                break;
+            }
+        }
+            
+        for (int i = count; i < length; i++){
             int newest = Integer.parseInt(reader.readLine());
             
             if(newest < first){
