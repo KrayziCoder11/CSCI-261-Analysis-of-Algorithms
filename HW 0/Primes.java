@@ -2,6 +2,7 @@ import java.io.*;
 
 public class Primes {
 
+    //this function checks if the given number is prime
     static boolean isPrime(int n)
     {
         if (n <= 1){
@@ -18,8 +19,13 @@ public class Primes {
 
 
     static void printPrimes(int n) {
+        
         int count = 2;
+
+        //loops through each number <= the given input
         while(count <= n){
+
+            //checks if each # is prime
             if(isPrime(count)){
                 System.out.println(count);
             }
@@ -29,6 +35,8 @@ public class Primes {
     }
 
     public static void main(String[] args) {
+
+        //reads in given input and runs "printPrimes()" function
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             printPrimes(Integer.parseInt(reader.readLine()));
