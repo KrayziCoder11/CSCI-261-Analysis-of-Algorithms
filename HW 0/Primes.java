@@ -1,3 +1,11 @@
+/**
+ * JP Dumont
+ * Hw 0
+ * 
+ * CSCI 261 Analysis of Algorithms 
+ * Ting Cao
+ * Section 4
+ */
 import java.io.*;
 
 public class Primes {
