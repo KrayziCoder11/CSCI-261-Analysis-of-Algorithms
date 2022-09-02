@@ -132,5 +132,6 @@ public class Planters{
      * finish comments in is_replantable
      * test if works 
      *      have method only print the sorted arrays to make sure things sort as hoped for
+     * delete merge sort class
      */
 }
