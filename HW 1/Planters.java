@@ -104,8 +104,12 @@ public class Planters{
         merge_Sort(plants, 0, num_plants);
         merge_Sort(pots, 0, num_pots);
 
-
+        //starts with largest plant (at the end of the array) and works backward
          for(int i = num_plants - 1; i >= 0; i--){
+            
+            //checks if the plant can be repotted
+            //if yes: the plant is repotted
+            //if not: "NO" is printed and loop ends
             if (plants[i] < pots[i]){
                 int temp = plants[i];
                 plants[i] = pots[i];
@@ -113,12 +117,12 @@ public class Planters{
                 merge_Sort(pots, 0, num_pots);
 
             }
-            //if a plant cannot be repotted, "NO" is printed and the loop ends
             else{
                 System.out.println("NO");
                 break;
             }
          }
+
          //prints "YES" after all plants have been repotted
          System.out.println("YES");
     }
@@ -129,9 +133,8 @@ public class Planters{
     }
     /**
      * TODO:
-     * finish comments in is_replantable
      * test if works 
      *      have method only print the sorted arrays to make sure things sort as hoped for
-     * delete merge sort class
+     * 
      */
 }
