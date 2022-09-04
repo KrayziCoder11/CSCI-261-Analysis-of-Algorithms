@@ -101,30 +101,34 @@ public class Planters{
         }
 
         //sorts both the plants[] and pots[]
-        merge_Sort(plants, 0, num_plants);
-        merge_Sort(pots, 0, num_pots);
-
+        merge_Sort(plants, 0, num_plants - 1);
+        merge_Sort(pots, 0, num_pots - 1);
+        
         //starts with largest plant (at the end of the array) and works backward
+        boolean unpottable = false;
          for(int i = num_plants - 1; i >= 0; i--){
             
             //checks if the plant can be repotted
             //if yes: the plant is repotted
             //if not: "NO" is printed and loop ends
-            if (plants[i] < pots[i]){
+            if (plants[i] < pots[num_pots - 1]){
                 int temp = plants[i];
-                plants[i] = pots[i];
-                pots[i] = temp;
-                merge_Sort(pots, 0, num_pots);
+                plants[i] = pots[num_pots - 1];
+                pots[num_pots - 1] = temp;
+                merge_Sort(pots, 0, num_pots - 1);
 
             }
             else{
                 System.out.println("NO");
+                unpottable = true;
                 break;
             }
          }
 
          //prints "YES" after all plants have been repotted
-         System.out.println("YES");
+         if(!unpottable){
+            System.out.println("YES");
+         }
     }
 
 
