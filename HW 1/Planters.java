@@ -80,14 +80,106 @@ public class Planters{
         }
     }
  
+    //This function determines if all of the plants can be replotted
+    static void is_Replantable(int[] pots, int[] plants, int num_plants, int num_pots){
+        
+        //The following while loop and variables do the following:
+        //      - orders plants and pots in a single array
+        //      - creates second array (dictionary int[]) to keep track of which index is a pot or plant
+        int[] combo = new int[num_plants + num_pots];
+        int[] dictionary = new int[num_plants + num_pots];
+        
+        int plant_index = num_plants - 1;
+        int pot_index = num_pots - 1;
+        int combo_index = num_plants + num_pots - 1;
 
-    static void is_Replantable() throws IOException{
+        while(true){
+            if(plant_index >= 0 && pot_index >= 0){
+                if(pots[pot_index] >= plants[plant_index]){
+                    combo[combo_index] = pots[pot_index];
+                    dictionary[combo_index] = 0;
+                    combo_index--;
+                    pot_index--;
+                }
+                else if(pots[pot_index] < plants[plant_index]){
+                    combo[combo_index] = plants[plant_index];
+                    dictionary[combo_index] = 1;
+                    combo_index--;
+                    plant_index--;
+                }
+                
+            }
+            else{
+                if(plant_index < 0 && pot_index >= 0){
+                    combo[combo_index] = pots[pot_index];
+                    dictionary[combo_index] = 0;
+                    combo_index--;
+                    pot_index--;
+                }
+                else if(plant_index >= 0 && pot_index < 0){
+                    combo[combo_index] = plants[plant_index];
+                    dictionary[combo_index] = 1;
+                    combo_index--;
+                    plant_index--;
+                }
+                else if(plant_index < 0 && pot_index < 0){
+                    break;
+                }            
+            }
+        }
+
+
+        //the following while loop does the following
+        //      - it finds the largest pot and largest plant
+        //      - it determines if the largest plant can be repotted
+        //      - loop ends if no more plants can be repotted
+        int l = num_plants + num_pots - 1;
+        int o = num_plants + num_pots - 1;
+        boolean repottable = true;
+        while(true){
+            
+            if(l >= 0 && o >= 0){
+                if(dictionary[l] != 1){
+                    l--;
+                }
+                else if(dictionary[o] != 0){
+                    o--;
+                }
+                else{
+                    if(combo[o] > combo[l]){
+                        dictionary[o] = 1;
+                        dictionary[l] = 0;
+                    }
+                    else{
+                        repottable = false;
+                        break;
+                    }
+                }
+            }
+            else{
+                break;    
+            }
+            
+        }
+        
+        
+        if(repottable){
+            System.out.println("YES");
+        }
+        else{
+            System.out.println("NO");
+        }
+    }
+
+    //this function retrieves all of the provided input
+    static void get_Input() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
         //reads in the number of plants and pots
         int num_plants = Integer.valueOf(scanner.next());
         int num_pots = Integer.valueOf(scanner.next());
 
+        
         //creates and fills an array to represent the potted plants
         int[] plants = new int[num_plants];
         for (int i = 0; i < num_plants; i++){
@@ -99,46 +191,20 @@ public class Planters{
         for (int i = 0; i < num_pots; i++){
             pots[i] = Integer.valueOf(scanner.next());
         }
+        
 
         //sorts both the plants[] and pots[]
         merge_Sort(plants, 0, num_plants - 1);
         merge_Sort(pots, 0, num_pots - 1);
         
-        //starts with largest plant (at the end of the array) and works backward
-        boolean unpottable = false;
-         for(int i = num_plants - 1; i >= 0; i--){
-            
-            //checks if the plant can be repotted
-            //if yes: the plant is repotted
-            //if not: "NO" is printed and loop ends
-            if (plants[i] < pots[num_pots - 1]){
-                int temp = plants[i];
-                plants[i] = pots[num_pots - 1];
-                pots[num_pots - 1] = temp;
-                merge_Sort(pots, 0, num_pots - 1);
+        //determines if all the plants can be repotted
+        is_Replantable(pots, plants, num_plants, num_pots);
 
-            }
-            else{
-                System.out.println("NO");
-                unpottable = true;
-                break;
-            }
-         }
-
-         //prints "YES" after all plants have been repotted
-         if(!unpottable){
-            System.out.println("YES");
-         }
     }
 
 
     public static void main(String[] args) throws IOException {
-        is_Replantable();
+        get_Input();
     }
-    /**
-     * TODO:
-     * test if works 
-     *      have method only print the sorted arrays to make sure things sort as hoped for
-     * 
-     */
+    
 }
