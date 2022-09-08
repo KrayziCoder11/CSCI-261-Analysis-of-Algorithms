@@ -4,25 +4,6 @@ import java.util.Scanner;
 
 public class FindMaxPairsDouble {
 
-    //returns the factorial of a given number
-    static long my_factorial(int n){
-        long answer = (long) 1;
-        for(long i = n; i >0; i--){
-            answer = answer * i;
-        }
-
-        return answer;
-    }
-
-    //calculates how many sums there are based on the size of the input
-    static long NumberOfSums(int input_size){
-        long first = my_factorial(input_size);
-        long second =(2 * my_factorial(input_size-2));
-        //System.out.println("First: " + first);
-        //System.out.println("Second: " + second);
-        return first / second;
-    }
-
     // Merges the two subarrays of arr[].
     static void merge(double array[], int l, int m, int r)
     {
@@ -105,7 +86,7 @@ public class FindMaxPairsDouble {
 
         //creates array for the input
         int length = Integer.valueOf(scanner.next());
-        int sum_length = (int) NumberOfSums(length);
+        int sum_length = length * length;
         double[] numbers = new double[length];
 
         //creates an array to hold all of the sums of the input
@@ -114,19 +95,21 @@ public class FindMaxPairsDouble {
         //reads in all of the input
         int n = 0;
         while(scanner.hasNext()){
-            numbers[n] = Integer.valueOf(scanner.next());
+            numbers[n] = Double.valueOf(scanner.next());
             n++;
         }
         
         //calculates all of the sums
         int c = 0;
         for(int i = 0; i < length; i++){
-            for(int k = i + 1; k < length; k++){
-                sums[c] = (numbers[i] + numbers[k]);   
+            for(int k = 0; k < length; k++){
+                double val = numbers[i] + numbers[k];
+                sums[c] = (val);   
                 c++;
             }
         } 
 
+        
         //sorts the sums[] arrays
         merge_Sort(sums, 0, sum_length - 1);
 
@@ -138,6 +121,7 @@ public class FindMaxPairsDouble {
         
         //loops through all the sums
         //finds the most common summ and the number of times it appears in the array
+        
         for(int i = 1; i < sum_length; i++){
             if(sums[i] == current_sum){
                 count++;
@@ -156,8 +140,9 @@ public class FindMaxPairsDouble {
                 count = 1;
             }    
         }
-        System.out.print(highest_count + " "); 
+        System.out.print(highest_count / 2 + " "); 
         System.out.format("%.6f", highest_sum);
+        //System.out.printf("%.6f",highest_sum);
         
         
     }
