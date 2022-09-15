@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class FindMaxPairsDouble {
 
     // Merges the two subarrays of arr[].
-    static void merge(double array[], int l, int m, int r)
-    {
+    static void merge(double array[], int l, int m, int r){
         // Find sizes of two subarrays to be merged
         int left_size = m - l + 1;
         int right_size = r - m;
